@@ -1,0 +1,77 @@
+service: swapi-rimac
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: dev
+  region: us-east-1
+  environment:
+    TABLA_PERSONAS: ${self:service}-${opt:stage, self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource: "*"
+resources:
+  Resources:
+    PersonasDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"   
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: "NEW_AND_OLD_IMAGES"
+        TableName: ${self:provider.environment.TABLA_PERSONAS}
+
+functions:
+  index:
+    handler: api/api.detail
+    events:
+      - http: 
+          path: api
+          method: get
+
+  people_index:
+    handler: api/people.index
+    events:
+      - http: 
+          path: api/people
+          method: get
+  people_id:
+    handler: api/people.id
+    events:
+      - http: 
+          path: api/people/{id}
+          method: get
+  people_post:
+    handler: api/people.submit
+    events:
+      - http: 
+          path: api/people/submit
+          method: post
+  people_schema:
+    handler: api/people.schema
+    events:
+      - http: 
+          path: api/people/schema
+          method: get
