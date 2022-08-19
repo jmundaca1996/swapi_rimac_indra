@@ -1,0 +1,82 @@
+post:
+  tags:
+    - SWAPI
+  summary: Crear Personaje
+  description: |
+    Crea informacion de un personaje de SW en DynamoDB
+  operationId: '2'
+  requestBody:
+    description: Payload de datos que se ingresaran a la BD DynamoDB
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - description: .
+              title: Ingresar Personaje
+            - $ref: ../schemas/body/personajeSubmit.yaml
+        examples:
+          Example-01:
+            summary: Creación de personaje
+            value:
+              nombre: R2-D2
+              talla: '96'
+              masa: '32'
+              color_cabello: n/a
+              color_piel: white, blue
+              color_ojos: red
+              anio_nacimiento: 33BBY
+              genero: n/a
+              planeta: https://swapi.dev/api/planets/8/
+              peliculas:
+              - https://swapi.dev/api/films/1/
+              - https://swapi.dev/api/films/2/
+              - https://swapi.dev/api/films/3/
+              - https://swapi.dev/api/films/4/
+              - https://swapi.dev/api/films/5/
+              - https://swapi.dev/api/films/6/
+              especies:
+              - https://swapi.dev/api/species/2/
+              vehiculos: []
+              naves: []
+              creacion: '2014-12-10T15:11:50.376000Z'
+              edicion: '2014-12-20T21:17:50.311000Z'
+              enlace: https://swapi.dev/api/people/3/
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/peopleSubmit.yaml
+          example:
+              result: success
+              item:
+                nombre: R2-D2
+                talla: '96'
+                masa: '32'
+                color_cabello: n/a
+                color_piel: white, blue
+                color_ojos: red
+                anio_nacimiento: 33BBY
+                genero: n/a
+                planeta: https://swapi.dev/api/planets/8/
+                peliculas:
+                - https://swapi.dev/api/films/1/
+                - https://swapi.dev/api/films/2/
+                - https://swapi.dev/api/films/3/
+                - https://swapi.dev/api/films/4/
+                - https://swapi.dev/api/films/5/
+                - https://swapi.dev/api/films/6/
+                especies:
+                - https://swapi.dev/api/species/2/
+                vehiculos: []
+                naves: []
+                creacion: '2022-08-19T04:15:53.669Z'
+                edicion: '2022-08-19T04:15:53.669Z'
+                enlace: https://swapi.dev/api/people/3/
+                id: 87707950-0243-4a61-87ec-9060b795925a
+    '403':
+      description: Forbidden   
+    '404':
+      description: User not found

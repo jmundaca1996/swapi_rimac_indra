@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Swager Swapi Rimac
+  termsOfService: ""
+  description: "Swapi integracion node.js +DynamoDb "
+  contact:
+    email: joseantonymundacaangeles@gmail.com
+    url: ""
+  license:
+    name: jmundaca Swapi
+    url: "http://google.com"
+  x-logo:
+    url: "https://spyrohost.com/logo-basic-192.png"
+tags:
+  - name: SWAPI
+    description: Servicios Swapi
+servers:
+  - url: "https://rh9djww5n8.execute-api.us-east-1.amazonaws.com"
+paths:
+  "/dev/api/people/{id}":
+    $ref: "paths/api@people@id.yaml"
+  "/dev/api/people/submit":
+    $ref: "paths/api@people@submit.yaml"
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key

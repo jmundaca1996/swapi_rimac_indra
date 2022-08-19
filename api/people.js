@@ -115,13 +115,10 @@ module.exports.id = async (event) => {
     })
     .catch((error) => {
       return {
-        statusCode: 200,
-        body: swapi.response(
-          {
-            result: 'No encontrado'
-          },
-          event
-        )
+        statusCode: 404,
+        body: swapi.response({
+          result: 'No encontrado'
+        })
       };
     });
 };

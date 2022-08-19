@@ -1,0 +1,204 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Swager Swapi Rimac
+  termsOfService: ''
+  description: 'Swapi integracion node.js +DynamoDb '
+  contact:
+    email: joseantonymundacaangeles@gmail.com
+    url: ''
+  license:
+    name: jmundaca Swapi
+    url: http://google.com
+  x-logo:
+    url: https://spyrohost.com/logo-basic-192.png
+tags:
+  - name: SWAPI
+    description: Servicios Swapi
+servers:
+  - url: https://rh9djww5n8.execute-api.us-east-1.amazonaws.com
+paths:
+  /dev/api/people/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Se debe enviar el id del personaje de Star Wars.
+      tags:
+        - SWAPI
+      summary: Obtener Personaje
+      description: |
+        Retorna informacion de un personaje de SW
+      operationId: '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peopleId'
+              example:
+                - nombre: Darth Vader
+                  talla: '202'
+                  masa: '136'
+                  color_cabello: none
+                  color_piel: white
+                  color_ojos: yellow
+                  anio_nacimiento: 41.9BBY
+                  genero: male
+                  planeta: https://swapi.dev/api/planets/1/
+                  peliculas:
+                    - https://swapi.dev/api/films/1/
+                    - https://swapi.dev/api/films/2/
+                    - https://swapi.dev/api/films/3/
+                    - https://swapi.dev/api/films/6/
+                  especies: []
+                  vehiculos: []
+                  naves:
+                    - https://swapi.dev/api/starships/13/
+                  creacion: '2014-12-10T15:18:20.704000Z'
+                  edicion: '2014-12-20T21:17:50.313000Z'
+                  enlace: https://swapi.dev/api/people/4/
+        '403':
+          description: Forbidden
+        '404':
+          description: User not found
+  /dev/api/people/submit:
+    post:
+      tags:
+        - SWAPI
+      summary: Crear Personaje
+      description: |
+        Crea informacion de un personaje de SW en DynamoDB
+      operationId: '2'
+      requestBody:
+        description: Payload de datos que se ingresaran a la BD DynamoDB
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - description: .
+                  title: Ingresar Personaje
+                - $ref: '#/components/schemas/personajeSubmit'
+            examples:
+              Example-01:
+                summary: Creación de personaje
+                value:
+                  nombre: R2-D2
+                  talla: '96'
+                  masa: '32'
+                  color_cabello: n/a
+                  color_piel: white, blue
+                  color_ojos: red
+                  anio_nacimiento: 33BBY
+                  genero: n/a
+                  planeta: https://swapi.dev/api/planets/8/
+                  peliculas:
+                    - https://swapi.dev/api/films/1/
+                    - https://swapi.dev/api/films/2/
+                    - https://swapi.dev/api/films/3/
+                    - https://swapi.dev/api/films/4/
+                    - https://swapi.dev/api/films/5/
+                    - https://swapi.dev/api/films/6/
+                  especies:
+                    - https://swapi.dev/api/species/2/
+                  vehiculos: []
+                  naves: []
+                  creacion: '2014-12-10T15:11:50.376000Z'
+                  edicion: '2014-12-20T21:17:50.311000Z'
+                  enlace: https://swapi.dev/api/people/3/
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peopleSubmit'
+              example:
+                result: success
+                item:
+                  nombre: R2-D2
+                  talla: '96'
+                  masa: '32'
+                  color_cabello: n/a
+                  color_piel: white, blue
+                  color_ojos: red
+                  anio_nacimiento: 33BBY
+                  genero: n/a
+                  planeta: https://swapi.dev/api/planets/8/
+                  peliculas:
+                    - https://swapi.dev/api/films/1/
+                    - https://swapi.dev/api/films/2/
+                    - https://swapi.dev/api/films/3/
+                    - https://swapi.dev/api/films/4/
+                    - https://swapi.dev/api/films/5/
+                    - https://swapi.dev/api/films/6/
+                  especies:
+                    - https://swapi.dev/api/species/2/
+                  vehiculos: []
+                  naves: []
+                  creacion: '2022-08-19T04:15:53.669Z'
+                  edicion: '2022-08-19T04:15:53.669Z'
+                  enlace: https://swapi.dev/api/people/3/
+                  id: 87707950-0243-4a61-87ec-9060b795925a
+        '403':
+          description: Forbidden
+        '404':
+          description: User not found
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key
+  schemas:
+    peopleId:
+      type: array
+      items:
+        type: object
+        properties:
+          nombre:
+            description: Nombre del personaje
+            type: string
+            example: SKYWALKER
+          peliculas:
+            description: Peliculas en las que actuo el personaje
+            type: array
+            items:
+              type: string
+              example: https://swapi.dev/api/films/6/
+    personajeSubmit:
+      type: object
+      description: Payload de personaje a ingresar.
+      properties:
+        nombre:
+          description: Nombre del personaje
+          type: string
+          example: SKYWALKER
+        peliculas:
+          description: Peliculas en las que actuo el personaje
+          type: array
+          items:
+            type: string
+            example: https://swapi.dev/api/films/6/
+      required:
+        - nombre
+    peopleSubmit:
+      type: array
+      items:
+        type: object
+        properties:
+          nombre:
+            description: Nombre del personaje
+            type: string
+            example: SKYWALKER
+          peliculas:
+            description: Peliculas en las que actuo el personaje
+            type: array
+            items:
+              type: string
+              example: https://swapi.dev/api/films/6/

@@ -1,0 +1,47 @@
+get:
+  parameters:
+    - in : path
+      name : id
+      schema:
+        type: string
+      required: true
+      description: Se debe enviar el id del personaje de Star Wars.
+  tags:
+    - SWAPI
+  summary: Obtener Personaje
+  description: |
+    Retorna informacion de un personaje de SW
+  operationId: '1'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/peopleId.yaml
+          example:
+              - nombre: Darth Vader
+                talla: '202'
+                masa: '136'
+                color_cabello: none
+                color_piel: white
+                color_ojos: yellow
+                anio_nacimiento: 41.9BBY
+                genero: male
+                planeta: https://swapi.dev/api/planets/1/
+                peliculas:
+                - https://swapi.dev/api/films/1/
+                - https://swapi.dev/api/films/2/
+                - https://swapi.dev/api/films/3/
+                - https://swapi.dev/api/films/6/
+                especies: []
+                vehiculos: []
+                naves:
+                - https://swapi.dev/api/starships/13/
+                creacion: '2014-12-10T15:18:20.704000Z'
+                edicion: '2014-12-20T21:17:50.313000Z'
+                enlace: https://swapi.dev/api/people/4/
+    '403':
+      description: Forbidden   
+    '404':
+      description: User not found
