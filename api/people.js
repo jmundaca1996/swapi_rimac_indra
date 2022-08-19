@@ -2,6 +2,7 @@
 const swapi = require('../responses/swapi');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+const swapiPeople = require('../swapi/swapiPeople');
 AWS.config.setPromisesDependency(require('bluebird'));
 
 const Ajv = require('ajv');
@@ -104,23 +105,12 @@ module.exports.index = async (event) => {
 };
 
 module.exports.id = async (event) => {
-  const url_aws = event.headers.Host;
-  const params = {
-    TableName: process.env.TABLA_PERSONAS,
-    Key: {
-      id: event.pathParameters.id
-    }
-  };
-
-  return dynamoDb
-    .get(params)
-    .promise()
+  return swapiPeople
+    .obtenerPersonasSw(event.pathParameters.id)
     .then((result) => {
-      result.Item.url = 'https://' + url_aws + '/api/people/' + result.Item.id;
-      delete result.Item.id;
       return {
         statusCode: 200,
-        body: swapi.response(result.Item, event)
+        body: swapi.response(result)
       };
     })
     .catch((error) => {
