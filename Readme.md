@@ -3,7 +3,7 @@ Integración de la API Swapi con node.js, aws Lambda, DynamoDb
 
 ## Instalación
 
-Node.js
+Node.js v16.14.0
 
 Ejecutar los Comandos para Instalar las Dependencias de Node.js
 
