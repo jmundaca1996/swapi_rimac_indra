@@ -82,12 +82,9 @@ module.exports.index = async (event) => {
     .then((result) => {
       return {
         statusCode: 200,
-        body: swapi.response(
-          {
-            results: result.Items
-          },
-          event
-        )
+        body: swapi.response({
+          results: result.Items
+        })
       };
     })
     .catch((err) => {
@@ -134,7 +131,7 @@ module.exports.submit = async (event) => {
   if (!valid)
     return {
       statusCode: 401,
-      body: swapi.response({ result: 'error', error: ajv.errors }, event)
+      body: swapi.response({ result: 'error', error: ajv.errors })
     };
 
   const peopleInfo = {
@@ -147,7 +144,7 @@ module.exports.submit = async (event) => {
     .then((res) => {});
   return {
     statusCode: 200,
-    body: swapi.response({ result: 'success', item: body }, event)
+    body: swapi.response({ result: 'success', item: body })
   };
 };
 
@@ -156,6 +153,6 @@ module.exports.schema = async (event) => {
   schema.properties.url = { type: 'string' };
   return {
     statusCode: 200,
-    body: swapi.response(schema, event)
+    body: swapi.response(schema)
   };
 };

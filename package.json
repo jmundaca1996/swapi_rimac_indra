@@ -1,9 +1,10 @@
 {
   "scripts": {
     "start": "serverless offline start",
+    "test": "jest --coverage",
     "start-oas": "openapi preview-docs",
-    "test-oas" : "openapi lint",
-    "build-oas" : "openapi bundle -o openapi/dist/openapi.yaml"
+    "test-oas": "openapi lint",
+    "build-oas": "openapi bundle -o openapi/dist/openapi.yaml"
   },
   "dependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.95",
@@ -11,6 +12,8 @@
     "aws-sdk": "^2.1197.0",
     "axios": "^0.27.2",
     "bluebird": "^3.7.2",
+    "jest": "^28.1.3",
+    "jest-cucumber": "^3.0.1",
     "serverless": "^3.22.0",
     "serverless-offline": "^9.2.4",
     "swagger-jsdoc": "^6.2.5",

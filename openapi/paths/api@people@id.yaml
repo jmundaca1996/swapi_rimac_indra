@@ -20,7 +20,7 @@ get:
           schema:
             $ref: ../components/schemas/peopleId.yaml
           example:
-              - nombre: Darth Vader
+                nombre: Darth Vader
                 talla: '202'
                 masa: '136'
                 color_cabello: none

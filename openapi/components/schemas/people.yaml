@@ -1,0 +1,82 @@
+type: object
+properties: 
+  results:
+    type: array
+    items: 
+      properties:
+          nombre:
+            description: Nombre del personaje
+            type: string
+            example: Darth Vader
+          talla:
+            description : Talla del personaje
+            type: string
+            example : 202
+          masa : 
+            description : Masa del Personaje
+            type: string
+            example : 136
+          color_cabello:
+            description : Color del cabello del Personaje
+            type: string
+            example : none
+          color_piel :
+            description : Color de piel del Personaje
+            type : string
+            example : white
+          color_ojos :
+            description : Color de ojos del Peronaje
+            type : string
+            example : yellow
+          anio_nacimiento:
+            description : año de nacimiento del personaje
+            type : string
+            example : 41.9BBY
+          genero:
+            description : Genero del Personaje
+            type : string
+            example : male
+          planeta:
+            description : Planeta del personaje
+            type : string
+            example : https://swapi.dev/api/planets/1/
+          peliculas:
+            description: Peliculas en las que actuo el personaje
+            type: array
+            items: 
+              type: string
+              example: https://swapi.dev/api/films/1/
+          especies:
+            description : Especie del Personaje
+            type : array
+            items:
+              type : string
+              example: https://swapi.dev/api/species/2/ 
+          vehiculos:
+            description : Vehículos que manejan los personajes
+            type: array
+            items:
+              type : string
+              example: https://swapi.dev/api/vehicles/30/
+          naves:
+            description : Naves que manejan el Personaje
+            type: array
+            items:
+              type: string
+              example : https://swapi.dev/api/starships/12/
+          creacion:
+            description : Fecha de Creación del Personaje 
+            type : string
+            example : 2014-12-10T15:18:20.704000Z
+          edicion:
+            description : Fecha de ultima Actualización del Personaje
+            type : string
+            example : 2014-12-20T21:17:50.313000Z
+          enlace:
+            description : Enlace que se consulta al Personaje
+            type: string
+            example : https://swapi.dev/api/people/4/
+          id:
+            description : Id que se genera cuando se guarda el Personaje
+            type : string
+            example : 2ead120d-e243-4082-9bfe-07385f438cc9

@@ -11,7 +11,7 @@ info:
     name: jmundaca Swapi
     url: "http://google.com"
   x-logo:
-    url: "https://spyrohost.com/logo-basic-192.png"
+    url: "https://png.pngitem.com/pimgs/s/57-579127_darth-vader-star-wars-graphics-design-dxf-eps.png"
 tags:
   - name: SWAPI
     description: Servicios Swapi
@@ -22,6 +22,8 @@ paths:
     $ref: "paths/api@people@id.yaml"
   "/dev/api/people/submit":
     $ref: "paths/api@people@submit.yaml"
+  "/dev/api/people":
+    $ref: "paths/api@people@all.yaml"
 components:
   securitySchemes:
     api_key:

@@ -1,0 +1,44 @@
+get:
+  tags:
+    - SWAPI
+  summary: Obtener Personajes Db 
+  description: |
+    Retorna informacion todos los personaje de SW guardados en el DynamoDb
+  operationId: '3'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/people.yaml
+          example:
+              results:
+              - naves: []
+                nombre: C-3PO
+                color_cabello: n/a
+                masa: '75'
+                vehiculos: []
+                enlace: https://swapi.dev/api/people/2/
+                creacion: '2022-08-19T02:47:46.009Z'
+                peliculas:
+                - https://swapi.dev/api/films/1/
+                - https://swapi.dev/api/films/2/
+                - https://swapi.dev/api/films/3/
+                - https://swapi.dev/api/films/4/
+                - https://swapi.dev/api/films/5/
+                - https://swapi.dev/api/films/6/
+                talla: '167'
+                planeta: https://swapi.dev/api/planets/1/
+                color_piel: gold
+                especies:
+                - https://swapi.dev/api/species/2/
+                id: 2ead120d-e243-4082-9bfe-07385f438cc9
+                color_ojos: yellow
+                anio_nacimiento: 112BBY
+                genero: n/a
+                edicion: '2022-08-19T02:47:46.009Z'
+    '403':
+      description: Forbidden   
+    '404':
+      description: User not found
